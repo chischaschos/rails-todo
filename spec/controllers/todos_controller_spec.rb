@@ -10,4 +10,27 @@ describe TodosController do
     end
   end
 
+  describe "#create" do
+    context "successfully creates a new task" do
+      specify do
+        post :create
+        response.should be_redirect
+      end
+    end
+  end
+
+  describe "#show" do
+    context "when the task exists" do
+      let(:task) do
+        Task.create! name: 'The test task'
+      end
+
+      specify do
+        get :show, id: task.id
+        assigns(:task).should == task
+        response.should be_success
+      end
+    end
+  end
+
 end

@@ -1,4 +1,4 @@
 Todo::Application.routes.draw do
-  # root :to => 'welcome#index'
+  root :to => 'todos#new'
   resources :todos
 end
