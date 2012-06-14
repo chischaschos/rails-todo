@@ -14,7 +14,7 @@ describe TodosController do
     context "successfully creates a new task" do
       specify do
         post :create
-        response.should be_redirect
+        response.should redirect_to(root_path)
       end
     end
   end
@@ -30,6 +30,38 @@ describe TodosController do
         assigns(:task).should == task
         response.should be_success
       end
+    end
+  end
+
+  describe "#index" do
+    render_views
+
+    let(:tasks) do
+      [ Task.create!(name: 'Ir por leche') ]
+    end
+
+    before do
+      Task.should_receive(:all).and_return tasks
+    end
+
+    specify do
+      get :index
+      assigns(:tasks).should == tasks
+      response.should be_success
+    end
+  end
+
+  describe "#search" do
+    render_views
+
+    let(:tasks) do
+      [ Task.create!(name: 'Ir por leche') ]
+    end
+
+    specify do
+      get :search, term: 'leche'
+      assigns(:tasks).should == tasks
+      response.should render_template('todos/index')
     end
   end
 

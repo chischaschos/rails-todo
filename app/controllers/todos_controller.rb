@@ -1,11 +1,20 @@
 class TodosController < ApplicationController
+  def index
+    @tasks = Task.all
+  end
+
   def new
     @task = Task.new
   end
 
   def create
     task = Task.create! params[:task]
-    redirect_to todo_path(task)
+    redirect_to root_path
+  end
+
+  def search
+    @tasks = Task.search params[:term]
+    render :index
   end
 
   def show
