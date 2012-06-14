@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe TodosController do
-
   describe "#new" do
     context "successfully shows the new form" do
       specify do
@@ -58,10 +57,38 @@ describe TodosController do
       [ Task.create!(name: 'Ir por leche') ]
     end
 
+    before do
+      Task.should_receive(:search).with('leche').
+        and_return tasks
+    end
+
     specify do
       get :search, term: 'leche'
       assigns(:tasks).should == tasks
       response.should render_template('todos/index')
+    end
+  end
+
+  describe "#edit" do
+    let(:task) { Task.create!(name: 'Ir por leche') }
+
+    specify do
+      get :edit, id: task.id
+      assigns(:task).should == task
+      response.should be_success
+    end
+  end
+
+  describe "#update" do
+    let(:task) { Task.create!(name: 'Ir por leche') }
+
+    before do
+      Task.should_receive(:find).with(task.id.to_s).and_return task
+    end
+
+    specify do
+      put :update, id: task.id
+      response.should redirect_to(root_path)
     end
   end
 

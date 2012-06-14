@@ -1,0 +1,4 @@
+%h1 Detalle de tarea: #{@task.name}
+= form_for @task, url: todo_path(@task), method: :put do |f|
+  = f.text_field :name
+  = f.submit 'Actualizar'

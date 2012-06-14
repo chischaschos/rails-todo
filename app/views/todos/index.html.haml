@@ -1,4 +1,4 @@
 %h1 Todas las tareas
 %ul
 - @tasks.each do |task|
-  %li= task.name
+  %li= link_to task.name, edit_todo_path(task)

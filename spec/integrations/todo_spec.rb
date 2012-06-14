@@ -40,4 +40,22 @@ describe "CRUD Tasks" do
       visit '/todos/search'
     end
   end
+
+  context "Update a todo" do
+    let!(:tasks) do
+      [ Task.create!(name: 'Ir por leche'),
+        Task.create!(name: 'Comprar cheves'),
+        Task.create!(name: 'Ir al cine') ]
+    end
+
+    it "updates an existing todo" do
+      visit root_path
+      click_link 'Ir por leche'
+      page.has_content?('Detalle de tarea: Ir por leche').should be_true
+      fill_in 'task_name', with: 'Ir por cheve'
+      click_button 'Actualizar'
+      page.has_content?('Todas las tareas').should be_true
+      page.has_content?('Ir por cheve').should be_true
+    end
+  end
 end
