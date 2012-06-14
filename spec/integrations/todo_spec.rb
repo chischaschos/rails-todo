@@ -3,13 +3,13 @@ require 'spec_helper'
 describe "CRUD Tasks" do
 
   context "creation" do
-    it "successfully create new todo" do
-      visit '/todos/new'
+    it "successfully create new todo", js: true do
+      visit root_path
       fill_in 'task_name', with: 'Ir por leche'
       click_button 'Agregar'
-      #save_and_open_page
       page.has_content?('Todas las tareas').should be_true
       page.has_content?('Ir por leche').should be_true
+      #save_and_open_page
     end
   end
 

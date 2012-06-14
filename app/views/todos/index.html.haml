@@ -1,6 +1,11 @@
 %h1 Todas las tareas
-%ul
-- @tasks.each do |task|
-  %li
-    = link_to task.name, edit_todo_path(task)
-    = link_to 'X', todo_path(task), method: :delete
+%ul#todos_container
+  - @tasks.each do |task|
+    %li
+      = link_to task.name, edit_todo_path(task)
+      = link_to 'X', todo_path(task), method: :delete
+
+
+= form_for :task, url: todos_path do |f|
+  = f.text_field :name
+  = f.submit 'Agregar'

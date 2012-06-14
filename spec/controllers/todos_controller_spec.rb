@@ -13,7 +13,7 @@ describe TodosController do
     context "successfully creates a new task" do
       specify do
         post :create
-        response.should redirect_to(root_path)
+        response.status.should == 200
       end
     end
   end
