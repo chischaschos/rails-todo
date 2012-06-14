@@ -58,4 +58,18 @@ describe "CRUD Tasks" do
       page.has_content?('Ir por cheve').should be_true
     end
   end
+
+  context "Destroy todo" do
+    let!(:tasks) do
+      [ Task.create!(name: 'Ir por leche'),
+        Task.create!(name: 'Comprar cheves'),
+        Task.create!(name: 'Ir al cine') ]
+    end
+
+    it "successfully destroy a todo" do
+      visit root_path
+      find("a:contains('cheves') + a").click
+      page.has_content?('Comprar cheves').should be_false
+    end
+  end
 end

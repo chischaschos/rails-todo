@@ -16,6 +16,11 @@ class TodosController < ApplicationController
     redirect_to root_path
   end
 
+  def destroy
+    Task.destroy params[:id]
+    redirect_to root_path
+  end
+
   def search
     @tasks = Task.search params[:term]
     render :index

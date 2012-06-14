@@ -92,4 +92,17 @@ describe TodosController do
     end
   end
 
+  describe "#destroy" do
+    let(:task) { Task.create!(name: 'Ir por leche') }
+
+    before do
+      Task.should_receive(:destroy).with(task.id.to_s).and_return true
+    end
+
+    specify do
+      delete :destroy, id: task.id
+      response.should redirect_to(root_path)
+    end
+  end
+
 end
