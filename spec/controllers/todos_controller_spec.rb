@@ -12,8 +12,9 @@ describe TodosController do
   describe "#create" do
     context "successfully creates a new task" do
       specify do
-        post :create
+        post :create, task: { name: 'Bring some milk' }
         response.status.should == 200
+        response.body.should == ""
       end
     end
   end
@@ -101,7 +102,7 @@ describe TodosController do
 
     specify do
       delete :destroy, id: task.id
-      response.should redirect_to(root_path)
+      response.status.should == 200
     end
   end
 

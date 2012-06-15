@@ -5,10 +5,10 @@ describe "CRUD Tasks" do
   context "creation" do
     it "successfully create new todo", js: true do
       visit root_path
-      fill_in 'task_name', with: 'Ir por leche'
+      fill_in 'task_name', with: 'Ir por cachuchas'
       click_button 'Agregar'
       page.has_content?('Todas las tareas').should be_true
-      page.has_content?('Ir por leche').should be_true
+      page.has_css?("a:contains('Ir por cachuchas')").should be_true
       #save_and_open_page
     end
   end
@@ -70,6 +70,16 @@ describe "CRUD Tasks" do
       visit root_path
       find("a:contains('cheves') + a").click
       page.has_content?('Comprar cheves').should be_false
+    end
+
+    it "correctly deletes a newly added todo" do
+      visit root_path
+      fill_in 'task_name', with: 'Ir tortas'
+      click_button 'Agregar'
+      page.has_content?('Todas las tareas').should be_true
+      page.has_css?("a:contains('Ir por tortas')").should be_true
+      find("a:contains('tortas') + a").click
+      page.has_content?('Ir por tortas').should be_false
     end
   end
 end
