@@ -1,7 +1,11 @@
 source 'https://rubygems.org'
 
 gem 'rails', '3.2.3'
-gem 'sqlite3'
+gem 'jquery-rails'
+
+group :production do
+  gem 'pg'
+end
 
 group :assets do
   gem "twitter-bootstrap-rails"
@@ -17,10 +21,10 @@ group :test, :development do
   gem "capybara"
   gem 'launchy'
   gem 'guard-rspec'
+  gem 'sqlite3'
 end
 
 group :development do
   gem 'heroku'
 end
 
-gem 'jquery-rails'
