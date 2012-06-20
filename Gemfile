@@ -19,4 +19,8 @@ group :test, :development do
   gem 'guard-rspec'
 end
 
+group :development do
+  gem 'heroku'
+end
+
 gem 'jquery-rails'
