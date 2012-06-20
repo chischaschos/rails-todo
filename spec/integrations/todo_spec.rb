@@ -7,8 +7,8 @@ describe "CRUD Tasks" do
       visit root_path
       fill_in 'task_name', with: 'Ir por cachuchas'
       click_button 'Agregar'
-      page.has_content?('Todas las tareas').should be_true
-      page.has_css?("a:contains('Ir por cachuchas')").should be_true
+      page.should have_content('Todas las tareas')
+      page.should have_css("a:contains('Ir por cachuchas')")
       #save_and_open_page
     end
   end
@@ -76,10 +76,13 @@ describe "CRUD Tasks" do
       visit root_path
       fill_in 'task_name', with: 'Ir tortas'
       click_button 'Agregar'
-      page.has_content?('Todas las tareas').should be_true
-      page.has_css?("a:contains('Ir por tortas')").should be_true
-      find("a:contains('tortas') + a").click
-      page.has_content?('Ir por tortas').should be_false
+      visit root_path
+      link = find('li:last-child a:first-child')
+      link.should have_content("Ir tortas")
+      link.click
+      visit root_path
+      save_and_open_page
+      page.has_content?("Ir tortas").should be_false
     end
   end
 end

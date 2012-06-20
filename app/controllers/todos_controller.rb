@@ -18,7 +18,7 @@ class TodosController < ApplicationController
 
   def destroy
     Task.destroy params[:id]
-    redirect_to root_path
+    redirect_to root_path, location: params[:id]
   end
 
   def search
