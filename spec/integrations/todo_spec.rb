@@ -2,6 +2,15 @@ require 'spec_helper'
 
 describe "CRUD Tasks" do
 
+  before do
+    visit new_user_registration_path
+    fill_in 'user_email', with: 'test@test.com'
+    fill_in 'user_password', with: '123test123'
+    fill_in 'user_password_confirmation', with: '123test123'
+    click_button 'Sign up'
+    #save_and_open_page
+  end
+
   context "creation" do
     it "successfully create new todo", js: true do
       visit root_path
@@ -9,7 +18,6 @@ describe "CRUD Tasks" do
       click_button 'Agregar'
       page.should have_content('All tasks')
       page.should have_css("a:contains('Ir por cachuchas')")
-      #save_and_open_page
     end
   end
 
