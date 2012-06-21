@@ -77,8 +77,7 @@ describe "CRUD Tasks" do
       fill_in 'task_name', with: 'Ir tortas'
       click_button 'Agregar'
       visit root_path
-      link = find('li:last-child a:first-child')
-      link.should have_content("Ir tortas")
+      find('li:last-child a:first-child').should have_content("Ir tortas")
       find('li:last-child a:last-child').click
       page.should_not have_content("Ir tortas")
     end
