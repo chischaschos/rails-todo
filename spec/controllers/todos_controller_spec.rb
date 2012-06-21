@@ -1,6 +1,13 @@
 require 'spec_helper'
 
 describe TodosController do
+
+  before do
+    user = User.create! email: 'test@test.com', password: '123123',
+      password_confirmation: '123123'
+    sign_in user
+  end
+
   describe "#new" do
     context "successfully shows the new form" do
       specify do
