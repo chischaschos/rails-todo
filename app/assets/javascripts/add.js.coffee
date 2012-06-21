@@ -1,5 +1,5 @@
 $ ->
-  $('form').live 'submit', (event) ->
+  $('form#todos').live 'submit', (event) ->
     event.preventDefault()
     form = $(event.target)
     action = form.attr('action')

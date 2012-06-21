@@ -6,6 +6,6 @@
       = link_to 'X', todo_path(task), method: :delete
 
 
-= form_for :task, url: todos_path do |f|
+= form_for :task, url: todos_path, html: { id: 'todos'} do |f|
   = f.text_field :name
   = f.submit 'Agregar'
